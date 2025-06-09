@@ -1,0 +1,110 @@
+#include <assert.h>
+#include <string.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+#define DEBUG_MODE 1
+
+// The easiest way to implement malloc.
+// Unfortunately, we won't be able to implement free with this malloc,
+// because we do not know what size block is associated with it.
+#if 0
+void *malloc(size_t size) {
+    void *p = sbrk(0);
+    void *request = sbrk(size);
+    if (request == (void *) -1)
+        return NULL;
+    assert(p == request);
+    return p;
+}
+#endif
+
+// Basically, a linked list.
+typedef struct block_meta{
+    size_t size;
+    struct block_meta *next;
+    int free;
+#if DEBUG_MODE
+    int magic;
+#endif
+} block_meta;
+
+
+#define META_SIZE sizeof(block_meta)
+
+// head of the linked list.
+void *global_base = NULL;
+
+block_meta *find_free_block(block_meta **last, size_t size) {
+    block_meta *current = global_base;
+    while (current != NULL && (current->free && current->size >= size)) {
+        *last = current;
+        current = current->next;
+    }
+    return current; // node which size fits with the requested or NULL otherwise(end of linked list).
+}
+
+block_meta *request_space(block_meta *last, size_t size) {
+    block_meta *block;
+    block = sbrk(0);
+    void *request = sbrk(size);
+    assert((void*)block == request);
+    if (request == (void *) -1)
+        return NULL;
+    if (last != NULL)
+        last->next = block;
+    block->size = size;
+    block->next = NULL;
+    block->free = 0;
+#if DEBUG_MODE
+    block->magic = 0x12345678;
+#endif
+    return block;
+}
+
+void *malloc(size_t size) {
+    block_meta *block;
+    if (size <= 0) {
+        return NULL;
+    }
+    if (!global_base) {
+        block = request_space(NULL, size);
+        if (!block) {
+            return NULL;
+        }
+        global_base = block;
+    } else {
+        block_meta *last = global_base;
+        block = find_free_block(&last, size);
+        if (!block) { // if there was not a free chunk of memory in the middle of the heap.
+            block = request_space(last, size);
+            if (!block) {
+                return NULL;
+            }
+        } else { // Found free block
+            block->free = 0;
+#if DEBUG_MODE
+            block->magic = 0x77777777;
+#endif
+        }
+    }
+    return (block + 1);
+}
+
+
+block_meta *get_block_ptr(void *ptr) {
+    return (block_meta *)ptr - 1;
+}
+
+
+void free(void *ptr) {
+    if (!ptr)
+        return;
+    block_meta *block_ptr = get_block_ptr(ptr);
+    assert(block_ptr->free == 0);
+#if DEBUG_MODE
+    assert(block_ptr->magic == 0x12345678 || block_ptr->magic == 0x77777777);
+    block_ptr->magic = 0x55555555;
+#endif
+    block_ptr->free = 1;
+}
