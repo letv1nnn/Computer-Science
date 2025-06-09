@@ -1,13 +1,17 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -g
 
-all: libmalloc.a
+SRC = src/malloc.c
+OBJ = malloc.o
+LIB = libmalloc.a
 
-libmalloc.a: malloc.o
+all: $(LIB)
+
+$(LIB): $(OBJ)
 	ar rcs $@ $^
 
-malloc.o: malloc.c
-	$(CC) $(CFLAGS) -c malloc.c
+$(OBJ): $(SRC)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.o libmalloc.a
+	rm -f *.o *.a
