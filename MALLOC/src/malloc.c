@@ -105,3 +105,15 @@ void free(void *ptr) {
     block_ptr->free = 1;
 }
 
+
+void *calloc(size_t q_elements, size_t element_size) {
+    size_t size = q_elements * element_size;
+    void *ptr = malloc(size);
+    memset(ptr, 0, size);
+    return ptr;
+}
+
+
+void *realloc(void *ptr, size_t newSize) {
+
+}
