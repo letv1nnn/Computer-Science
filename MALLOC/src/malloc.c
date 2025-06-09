@@ -115,5 +115,16 @@ void *calloc(size_t q_elements, size_t element_size) {
 
 
 void *realloc(void *ptr, size_t newSize) {
-
+    if (!ptr)
+        return malloc(newSize);
+    block_meta *block_ptr = get_block_ptr(ptr);
+    if (block_ptr->size >= newSize) {
+        return ptr;
+    }
+    void *new_ptr;
+    new_ptr = malloc(newSize);
+    if (!new_ptr)
+        return NULL;
+    free(ptr);
+    return new_ptr;
 }
