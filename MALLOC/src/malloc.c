@@ -1,9 +1,5 @@
-#include <assert.h>
-#include <string.h>
-#include <sys/types.h>
-#include <unistd.h>
+#include "malloc.h"
 
-#define DEBUG_MODE 1
 
 // The easiest way to implement malloc.
 // Unfortunately, we won't be able to implement free with this malloc,
@@ -108,3 +104,4 @@ void free(void *ptr) {
 #endif
     block_ptr->free = 1;
 }
+
