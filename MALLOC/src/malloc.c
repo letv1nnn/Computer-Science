@@ -121,10 +121,10 @@ void *realloc(void *ptr, size_t newSize) {
     if (block_ptr->size >= newSize) {
         return ptr;
     }
-    void *new_ptr;
-    new_ptr = malloc(newSize);
+    void *new_ptr = malloc(newSize);
     if (!new_ptr)
         return NULL;
+    memcpy(new_ptr, ptr, block_ptr->size);
     free(ptr);
     return new_ptr;
 }
