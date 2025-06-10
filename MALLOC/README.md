@@ -22,7 +22,7 @@ This project demonstrates a basic memory allocator written in C, mimicking the f
 
 ## Building the Project
 
-### Compile (without AddressSanitizer)
+### Compile
 ```bash
 make clean
 make CFLAGS="-g -Wall -Wextra -Werror -std=gnu11"
