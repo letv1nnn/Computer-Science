@@ -33,7 +33,7 @@ void *global_base = NULL;
 
 block_meta *find_free_block(block_meta **last, size_t size) {
     block_meta *current = global_base;
-    while (current != NULL && (current->free && current->size >= size)) {
+    while (current != NULL && !(current->free && current->size >= size)) {
         *last = current;
         current = current->next;
     }
@@ -43,7 +43,7 @@ block_meta *find_free_block(block_meta **last, size_t size) {
 block_meta *request_space(block_meta *last, size_t size) {
     block_meta *block;
     block = sbrk(0);
-    void *request = sbrk(size);
+    void *request = sbrk(size + META_SIZE);
     assert((void*)block == request);
     if (request == (void *) -1)
         return NULL;

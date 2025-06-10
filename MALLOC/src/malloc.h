@@ -9,8 +9,9 @@
 #define DEBUG_MODE 0
 
 void *malloc(size_t size);
-void *calloc(size_t q_elements, size_t element_size);
-void *realloc(void *ptr, size_t newSize);
 void free(void *ptr);
+void *calloc(size_t nmemb, size_t size);
+void *realloc(void *ptr, size_t size);
+
 
 #endif
