@@ -40,11 +40,8 @@ void test_realloc() {
     for (int i = 0; i < 5; i++)
         arr[i] = i + 1;
 
-    //int *old_arr = arr;
     int *new_arr = (int *)realloc(arr, 10 * sizeof(int));
     assert(new_arr != NULL);
-    //printf("Resized array from 5 to 10 elements (old: %p, new: %p)\n",
-      //     (void*)old_arr, (void*)new_arr);
     for (int i = 0; i < 5; i++) {
         assert(new_arr[i] == i + 1 && "Data not copied during realloc");
     }
