@@ -1,17 +1,23 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -g
 
-SRC = src/malloc.c
-OBJ = malloc.o
-LIB = libmalloc.a
+TARGET = mymalloc
+SOURCES = malloc.c
+OBJECTS = $(SOURCES:.c=.o)
 
-all: $(LIB)
+all: $(TARGET)
 
-$(LIB): $(OBJ)
-	ar rcs $@ $^
+$(TARGET): $(OBJECTS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS)
 
-$(OBJ): $(SRC)
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.o *.a
+	rm -f $(OBJECTS) $(TARGET)
+
+help:
+	@echo "Available targets:"
+	@echo "  all     - Build the program (default)"
+	@echo "  clean   - Remove all compiled files"
+	@echo "  help    - Show this help message"
