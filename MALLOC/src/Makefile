@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address -std=gnu11
+CFLAGS = -g -Wall -Wextra -Werror -std=gnu11
 
 TARGET = test_malloc
 
