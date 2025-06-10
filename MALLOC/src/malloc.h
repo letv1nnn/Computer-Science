@@ -6,7 +6,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#define DEBUG_MODE 0
+#define DEBUG_MODE 1
 
 void *malloc(size_t size);
 void free(void *ptr);
