@@ -25,4 +25,5 @@ This project demonstrates a basic memory allocator written in C, mimicking the f
 ### Compile
 ```bash
 make clean
-make CFLAGS="-g -Wall -Wextra -Werror -std=gnu11"
+make
+./test_malloc
