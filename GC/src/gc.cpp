@@ -69,8 +69,20 @@ struct Node : GCObject {
     }
 };
 
+
 int main() {
 
+    Node* a = new (gc_malloc(sizeof(Node))) Node(10);
+    Node* b = new (gc_malloc(sizeof(Node))) Node(20);
+    a->next = b;
+
+    std::vector<GCObject*> roots = {a};
+    gc_collect(roots);
+
+    a->next = nullptr;
+    gc_collect(roots);
+
+    gc_collect({});
     return 0;
 }
 
