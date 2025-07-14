@@ -1,5 +1,7 @@
 # Custom Memory Allocator
 
+## Description
+
 ### Implementation of `malloc`, `calloc`, `realloc`, and `free` in C
 
 This project demonstrates a basic memory allocator written in C, mimicking the functionality of the standard library's dynamic memory management functions. It uses a linked list to manage memory blocks, allowing for dynamic allocation and deallocation at runtime.
