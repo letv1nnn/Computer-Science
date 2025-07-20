@@ -1,4 +1,7 @@
-# Simple expression parser, evaluator, and compiler for arithmetic expressions
+# Arithmetic Interpreter
+
+## Description
+Simple expression parser, evaluator, and compiler for arithmetic expressions
 
 ## Features
 -  Lexical analyzer (tokenizer)
