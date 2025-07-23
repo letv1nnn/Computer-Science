@@ -1,0 +1,9 @@
+[package]
+name = "async-queues"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+async-task ={ version = "*" }
+futures-lite = { version = "*" }
+flume = { version = "*" }
