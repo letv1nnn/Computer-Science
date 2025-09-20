@@ -30,7 +30,7 @@ mod test {
     fn check_if_tag_test() {
         assert_eq!(
             ContentType::Tag(TagType::IfTag),
-            get_content_type("{% if name == 'Bob' %}")
+            get_content_type("{% if name == 'Bob' endif %}")
         );
     }
     // helper functions tests
