@@ -1,6 +1,6 @@
 # *Animated GIF*
 
-Used Go's standard image packages, which I've used to create a sequence of bit-mapped images and then encode the sequence as a GIF animation.
+Used Go's standard image packages to create a sequence of bit-mapped images and then encode the sequence as a GIF animation.
 
 ## *Build*
 
