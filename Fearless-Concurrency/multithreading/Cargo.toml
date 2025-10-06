@@ -1,0 +1,14 @@
+[package]
+name = "multithreading"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "message-passing"
+path = "./src/message-passing.rs"
+
+[[bin]]
+name = "shared-state"
+path = "./src/shared-state.rs"
+
+[dependencies]
