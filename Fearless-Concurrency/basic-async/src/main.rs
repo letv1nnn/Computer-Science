@@ -7,6 +7,7 @@ mod futures;
 mod waking_futures_remotely;
 mod sharing_data_between_futures;
 mod putting_all_together;
+mod pinning_in_futures;
 
 #[tokio::main]
 async fn main() {
@@ -15,6 +16,7 @@ async fn main() {
 
     // Futures - introduction
     // counter_example().await;
+    // pinning_in_futures::pinning_in_futures();
     // slow_task_example().await;
 
     // Futures - waking futures remotely
@@ -24,5 +26,5 @@ async fn main() {
     // sharing_data_test().await;
 
     // Putting all together
-    loggin_test().await;
+    // loggin_test().await;
 }

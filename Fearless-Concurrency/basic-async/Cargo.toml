@@ -1,7 +1,8 @@
 [package]
-name = "basic_async_rust"
+name = "basic-async"
 version = "0.1.0"
 edition = "2024"
+authors = ["letv1nnn"]
 
 [dependencies]
 tokio = { version = "1.47.1", features = ["full"] }
